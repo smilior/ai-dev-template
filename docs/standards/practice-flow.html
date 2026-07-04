@@ -176,6 +176,35 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
   <p class="body">この2駅がある限り、AIが暴走しても本線(main)には入れません。逆に2駅をおろそかにすると、検収なしのテストと未レビューのコードがそのまま資産になります。<b>短い2駅にこそ、品質の全責任が集まっている</b>と考えてください。</p>
 </section>
 
+<section>
+  <div class="sec-head"><span class="sec-no">1-4</span><h2>Issueが旅程表になる</h2></div>
+  <p class="body">1ストーリー = 1 Issue で進めます。旅の記録はすべてIssueのコメント欄に残るので、<b>Issue一覧を開けばどの列車がどの駅にいるか一目で分かります</b>(未着手/表待ち/実装中/完了の進捗ボード)。雛形は <a href="https://github.com/smilior/python-template/blob/main/.github/ISSUE_TEMPLATE/story.md">.github/ISSUE_TEMPLATE/story.md</a> にあり、Issue作成時に自動で選べます。</p>
+
+  <figure class="fig">
+  <svg class="dgm" viewBox="0 0 960 330" role="img" aria-label="Issue1枚の解剖図。本文と4つのコメントで1ストーリーが完結し、あなたの記録は検収の確定コメントとマージの2つ">
+    <rect x="60" y="24" width="840" height="282" rx="8" fill="none" stroke="var(--line-strong)" stroke-width="1.5"/>
+    <text x="84" y="56" class="nm" style="font-size:14px">Issue #23「US-03: 備品を返却する」</text>
+    <text x="876" y="56" text-anchor="end" class="sub">ラベル: story</text>
+
+    <rect x="84" y="72" width="792" height="40" rx="4" class="st"/>
+    <text x="100" y="97" class="sub" style="font-size:11px; fill: var(--ink)">本文: ストーリー1行 ・ 正本へのリンク(02_requirements.md の US-03) ・ 完了条件のチェックリスト</text>
+
+    <rect x="84" y="120" width="792" height="40" rx="4" class="st"/>
+    <text x="100" y="145" class="sub" style="font-size:11px; fill: var(--ink)">コメント1(AI): テストケース一覧表 US-03-S1〜S4 + 結合2本</text>
+
+    <rect x="84" y="168" width="792" height="40" rx="4" class="hu"/>
+    <text x="100" y="193" class="sub" style="font-size:11px; fill: var(--ink)">コメント2(あなた): 「S3が抜けてる」→「この表で確定」 ← 検収の証跡がここに残る</text>
+
+    <rect x="84" y="216" width="792" height="40" rx="4" class="st"/>
+    <text x="100" y="241" class="sub" style="font-size:11px; fill: var(--ink)">コメント3(AI): 旗6本Redを確認 → 実装完了、旗すべてGreen、欠番なし</text>
+
+    <rect x="84" y="264" width="792" height="40" rx="4" class="hu"/>
+    <text x="100" y="289" class="sub" style="font-size:11px; fill: var(--ink)">クローズ: PR「Fixes #23」をあなたがマージ → Issueが自動で閉じる ← 承認の証跡</text>
+  </svg>
+  <figcaption><span class="fno">図 2</span>Issue1枚の解剖図。緑=AIが書く行、赤=あなたの2つの記録(検収の確定・マージ)。これがそのまま監査の証跡になります。</figcaption>
+  </figure>
+</section>
+
 <div class="pn">
   <span class="ph"></span>
   <a href="practice-steps.html">次へ: ② 手順編 ─ コピペ運転マニュアル →</a>
