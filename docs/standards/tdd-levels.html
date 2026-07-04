@@ -116,13 +116,75 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
 </section>
 
 <section>
-  <div class="sec-head"><span class="sec-no">3-2</span><h2>唯一の例外: リファクタで単体テストが壊れたとき</h2></div>
+  <div class="sec-head"><span class="sec-no">3-2</span><h2>Redのまま置いていいのは何本?</h2></div>
+  <p class="body">基本編の「1本書いて1本通す」の正確な意味は、<b>「いま通そうとしているテストは常に1本」</b>です。存在していい赤が1本、ではありません。赤のまま待たせてよい本数と時間は、レベルごとに違います。</p>
+  <div class="tblwrap">
+  <table>
+    <thead><tr><th>レベル</th><th>Redのまま置いていい本数</th><th>Greenまでの猶予</th></tr></thead>
+    <tbody>
+      <tr><td class="hd">総合(E2E)</td><td><b>1本だけ</b>(着手中ストーリーの旗)</td><td>数日。赤のまま置くのが役目</td></tr>
+      <tr><td class="hd">結合</td><td>着手中の契約の分だけ(少数)</td><td>数十分〜数時間</td></tr>
+      <tr><td class="hd">単体</td><td><b>常に1本</b></td><td>数分。ここが「1本書いて1本通す」の主戦場</td></tr>
+    </tbody>
+  </table>
+  </div>
+
+  <figure class="fig">
+  <svg class="dgm" viewBox="0 0 960 255" role="img" aria-label="レベルごとの赤の滞空時間。E2Eは1本を長く、結合は数本を中くらい、単体は1本ずつ短く">
+    <defs>
+      <marker id="tr" markerWidth="10" markerHeight="7" refX="8" refY="3.5" orient="auto"><path d="M0,0 L9,3.5 L0,7 Z" fill="var(--muted)"/></marker>
+    </defs>
+    <text x="150" y="26" class="sub">時間の流れ →</text>
+    <line x1="150" y1="36" x2="900" y2="36" class="flow" marker-end="url(#tr)"/>
+    <rect x="620" y="14" width="12" height="12" rx="2" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/>
+    <text x="638" y="25" class="sub">= Red のまま</text>
+    <rect x="750" y="14" width="12" height="12" rx="2" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <text x="768" y="25" class="sub">= Green</text>
+
+    <text x="40" y="84" class="lbl" style="font-family: var(--mono); letter-spacing:.1em;">E2E</text>
+    <rect x="150" y="64" width="670" height="28" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.4"/>
+    <rect x="820" y="64" width="60" height="28" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.4"/>
+    <text x="170" y="83" class="lbl" fill="var(--red)" style="font-weight:700">Red(旗を立てる)</text>
+    <text x="850" y="83" text-anchor="middle" class="lbl" fill="var(--green)" style="font-weight:700">Green</text>
+    <text x="150" y="112" class="sub">1本だけ。赤のまま数日待たせてよい(意図した赤)</text>
+
+    <text x="40" y="150" class="lbl" style="font-family: var(--mono); letter-spacing:.1em;">結合</text>
+    <rect x="150" y="130" width="150" height="26" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.3"/>
+    <rect x="300" y="130" width="45" height="26" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.3"/>
+    <rect x="400" y="130" width="150" height="26" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.3"/>
+    <rect x="550" y="130" width="45" height="26" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.3"/>
+    <rect x="650" y="130" width="150" height="26" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.3"/>
+    <rect x="800" y="130" width="45" height="26" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.3"/>
+    <text x="150" y="176" class="sub">契約(API・スキーマ)ごとに数本。数十分〜数時間で緑にする</text>
+
+    <text x="40" y="216" class="lbl" style="font-family: var(--mono); letter-spacing:.1em;">単体</text>
+    <rect x="150" y="196" width="36" height="22" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/><rect x="186" y="196" width="16" height="22" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <rect x="216" y="196" width="36" height="22" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/><rect x="252" y="196" width="16" height="22" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <rect x="282" y="196" width="36" height="22" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/><rect x="318" y="196" width="16" height="22" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <rect x="348" y="196" width="36" height="22" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/><rect x="384" y="196" width="16" height="22" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <rect x="414" y="196" width="36" height="22" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/><rect x="450" y="196" width="16" height="22" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <rect x="480" y="196" width="36" height="22" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/><rect x="516" y="196" width="16" height="22" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <rect x="546" y="196" width="36" height="22" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/><rect x="582" y="196" width="16" height="22" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <rect x="612" y="196" width="36" height="22" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/><rect x="648" y="196" width="16" height="22" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <rect x="678" y="196" width="36" height="22" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/><rect x="714" y="196" width="16" height="22" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <rect x="744" y="196" width="36" height="22" rx="3" fill="var(--tint-red)" stroke="var(--red)" stroke-width="1.2"/><rect x="780" y="196" width="16" height="22" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="1.2"/>
+    <text x="150" y="240" class="sub">常に1本ずつ。数分で緑にして次へ(基本編の3拍子のリズム)</text>
+  </svg>
+  <figcaption><span class="fno">図 1</span>赤の滞空時間はレベルで違う。範囲が広いほど「1本を長く」、狭いほど「1本ずつ短く」。</figcaption>
+  </figure>
+
+  <p class="body">理由は、<b>範囲が広いテストほど、失敗の原因を教えてくれない</b>からです。赤いE2Eから分かるのは「どこかが未完成」だけで、どの関数が悪いかは分かりません。だから原因を特定できる単体でリズムを刻み、E2Eは1本だけ立てて進捗の物差しに使います。テストピラミッドの本数比(単体7:結合2:総合1)は、この理屈の帰結です。</p>
+  <p class="body">例えるなら、E2Eは月間目標(1つだけ壁に貼り、達成まで剥がさない)、結合は今週の目標(数個)、単体は今日のToDo(1個ずつ消す)。目標を10個貼る人が迷子になるのと同じで、赤いE2Eを並べるとノイズになります。</p>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-no">3-3</span><h2>唯一の例外: リファクタで単体テストが壊れたとき</h2></div>
   <p class="body">振る舞いを何も変えていないのに、コード整理で単体テストが落ちることがあります。これは仕様変更ではなく、<b>「テストが実装の中身に依存しすぎている」というテスト側の欠陥のサイン</b>です。このときだけ、テストを振る舞いベース(公開インターフェースだけを見る形)に書き直すのが正当です。</p>
   <p class="body">E2Eと結合は画面・APIという外側しか見ないため、この問題はほぼ起きません。規約の「振る舞いをテストし、実装をテストしない」は、この事故を予防するためにあります。</p>
 </section>
 
 <section>
-  <div class="sec-head"><span class="sec-no">3-3</span><h2>迷ったらこれ: テストを触っていい?</h2></div>
+  <div class="sec-head"><span class="sec-no">3-4</span><h2>迷ったらこれ: テストを触っていい?</h2></div>
   <figure class="fig">
   <svg class="dgm" viewBox="0 0 960 460" role="img" aria-label="テストを触っていいかの判断フローチャート">
     <defs>
@@ -154,7 +216,7 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
 
     <rect x="580" y="287" width="340" height="56" rx="4" class="warn"/>
     <text x="750" y="309" text-anchor="middle" class="main">テストが実装の中身に依存している</text>
-    <text x="750" y="328" text-anchor="middle" class="sub">振る舞いベースに書き直すのは正当(3-2の例外)</text>
+    <text x="750" y="328" text-anchor="middle" class="sub">振る舞いベースに書き直すのは正当(3-3の例外)</text>
 
     <rect x="265" y="388" width="250" height="54" rx="4" class="bad"/>
     <text x="390" y="410" text-anchor="middle" class="main">手順違反です</text>
@@ -174,12 +236,12 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
     <line x1="390" y1="360" x2="390" y2="384" class="flow" marker-end="url(#tl)"/>
     <rect x="398" y="362" width="46" height="15" class="chipbg"/><text x="421" y="373" text-anchor="middle" class="lbl">いいえ</text>
   </svg>
-  <figcaption><span class="fno">図 1</span>テストに手を伸ばす前の判断フロー。緑=正当な更新、青=例外的に正当、赤=手順違反。</figcaption>
+  <figcaption><span class="fno">図 2</span>テストに手を伸ばす前の判断フロー。緑=正当な更新、青=例外的に正当、赤=手順違反。</figcaption>
   </figure>
 </section>
 
 <section>
-  <div class="sec-head"><span class="sec-no">3-4</span><h2>卒業チェック: 3問</h2></div>
+  <div class="sec-head"><span class="sec-no">3-5</span><h2>卒業チェック: 3問</h2></div>
   <p class="body">クリックすると答えが開きます。3問とも即答できたら、このシリーズは卒業です。</p>
   <details class="quiz"><summary>Q1. Green にするために触っていいのは、テスト? 実装?</summary><p><b>実装だけです。</b>Redを確認した瞬間からテストは凍結され、「答え合わせの基準」に変わります。テストを触りたくなったら図1のフローへ。</p></details>
   <details class="quiz"><summary>Q2. 改修(仕様変更)が来たとき、最初に動かすのはどっち?</summary><p><b>テスト側です。</b>受け入れ条件を更新→テストを新仕様に書き換え→Redを確認してから、実装に手を付けます。実装から直し始めると、完了の基準がないまま作ることになります。</p></details>
