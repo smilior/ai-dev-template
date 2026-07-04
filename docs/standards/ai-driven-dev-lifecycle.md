@@ -72,14 +72,21 @@ AIがコードを書く分、人間が残すべきは **「意図」と「判断
 
 ```
 docs/
-├── 01_prd.md              # 企画
-├── 02_requirements.md     # 要件定義(ストーリー+受け入れ条件)
-├── 03_glossary.md         # 用語集
-├── 04_architecture.md     # 基本設計(構成図・ER図はMermaid)
-├── 05_design.md           # UI規約・デザイントークン
-├── adr/                   # 0001-use-postgres.md ...
-├── poc/                   # 検証計画と結果
-└── runbook/               # リリース・運用手順
+├── standards/             # 標準・規程(案件をまたいで使う)
+│   ├── ai-driven-dev-lifecycle.md  # 開発標準(正本)
+│   ├── governance.md               # 規程(文書管理・記録・AI利用・フォーマット)
+│   └── agents-roster.html          # チーム名鑑(編集しない一枚物)
+└── project/               # 案件の書類(雛形を埋めて使う)
+    ├── 01_prd.md          # 企画
+    ├── 02_requirements.md # 要件定義(ストーリー+受け入れ条件)
+    ├── 03_glossary.md     # 用語集
+    ├── 04_architecture.md # 基本設計(構成図・ER図はMermaid)
+    ├── 05_screens.md      # 画面一覧・遷移図
+    ├── 06_test-plan.md    # テスト計画
+    ├── 07_manual.md       # 操作マニュアル・リリース案内
+    ├── adr/               # 技術判断の記録(1判断1ファイル)
+    ├── poc/               # 検証計画と結果
+    └── runbook/           # リリース・運用手順
 CLAUDE.md                  # AI向け規約(実質の詳細設計)
 ```
 
