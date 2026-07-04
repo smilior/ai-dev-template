@@ -119,7 +119,45 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
 </section>
 
 <section>
-  <div class="sec-head"><span class="sec-no">1-3</span><h2>ゴールの旗: E2Eテストを最初に立てる</h2></div>
+  <div class="sec-head"><span class="sec-no">1-3</span><h2>付箋とチェック: ストーリーとシナリオ</h2></div>
+  <p class="body">旗の話に入る前に、言葉を2つだけ覚えます。システムで「<b>できること</b>」を1つずつ付箋に書き出したもの(備品を借りられる・返却できる…)が<b>ストーリー</b>で、US-01、US-02と番号を振ります。付箋1枚が開発の単位で、2〜3日で作れる大きさに切ります。</p>
+  <p class="body">次に付箋を1枚取り、「<b>どうなったら合格?</b>」を書き出します。ふつうに返したら在庫に戻る、遅れて返したら延滞記録が残る…。この合格チェック1個1個が<b>シナリオ</b>(US-03-S1、S2…)で、<b>チェック1個 = E2Eテスト1本</b>になります。番号は住所と同じです: US-03-S2 は「3丁目の2番地」。</p>
+
+  <figure class="fig">
+  <svg class="dgm" viewBox="0 0 960 340" role="img" aria-label="ストーリーは機能の付箋、シナリオはその付箋の合格チェック。チェック1個がテスト1本になる">
+    <text x="60" y="40" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em" fill="var(--muted)">できることの付箋 = ストーリー</text>
+    <g transform="rotate(-2 170 102)"><rect x="60" y="70" width="220" height="60" rx="3" fill="var(--card)" stroke="var(--line)" stroke-width="1.3"/><text x="76" y="96" class="sub" style="font-size:10px">US-01</text><text x="76" y="116" class="main" style="font-size:12.5px">備品を検索して借りられる</text></g>
+    <g transform="rotate(1.5 170 182)"><rect x="60" y="150" width="220" height="60" rx="3" fill="var(--card)" stroke="var(--line)" stroke-width="1.3"/><text x="76" y="176" class="sub" style="font-size:10px">US-02</text><text x="76" y="196" class="main" style="font-size:12.5px">備品を予約できる</text></g>
+    <g transform="rotate(-1 170 262)"><rect x="60" y="230" width="220" height="60" rx="3" fill="var(--tint-green)" stroke="var(--green)" stroke-width="2"/><text x="76" y="256" class="sub" style="font-size:10px">US-03</text><text x="76" y="276" class="main" style="font-size:12.5px">備品を返却できる</text></g>
+
+    <line x1="284" y1="232" x2="426" y2="72" class="dash"/>
+    <line x1="284" y1="290" x2="426" y2="308" class="dash"/>
+
+    <text x="430" y="40" style="font-family:var(--mono);font-size:10.5px;letter-spacing:.1em" fill="var(--muted)">その付箋の合格チェック = シナリオ</text>
+    <rect x="430" y="60" width="470" height="250" rx="6" fill="var(--card)" stroke="var(--green)" stroke-width="1.6"/>
+    <text x="452" y="92" class="main" style="font-size:13px">US-03「返却できる」の合格チェック</text>
+
+    <circle cx="462" cy="126" r="9" fill="none" stroke="var(--green)" stroke-width="1.6"/>
+    <text x="482" y="124" class="sub" style="font-size:11.5px; fill:var(--ink)">S1 ふつうに返す → 台帳が「在庫あり」に戻る</text>
+    <text x="482" y="140" class="sub">= E2Eテスト1本</text>
+    <circle cx="462" cy="186" r="9" fill="none" stroke="var(--green)" stroke-width="1.6"/>
+    <text x="482" y="184" class="sub" style="font-size:11.5px; fill:var(--ink)">S2 遅れて返す → 延滞の記録が残る</text>
+    <text x="482" y="200" class="sub">= E2Eテスト1本</text>
+    <circle cx="462" cy="246" r="9" fill="none" stroke="var(--green)" stroke-width="1.6"/>
+    <text x="482" y="244" class="sub" style="font-size:11.5px; fill:var(--ink)">S3 他人が借りた物を返そうとする → エラーになる</text>
+    <text x="482" y="260" class="sub">= E2Eテスト1本</text>
+
+    <text x="452" y="296" class="sub">チェックが3個なら、テストも3本。この「数が合うか」を人間が見ます(⑤検収編)</text>
+    <text x="60" y="330" class="sub">番号は住所: US-03-S2 = 「3丁目の2番地」。付箋の置き場は 02_requirements.md に最初から用意されています</text>
+  </svg>
+  <figcaption><span class="fno">図 1</span>付箋(ストーリー)= 作る単位・Issue1枚。チェック(シナリオ)= 確かめる単位・テスト1本。</figcaption>
+  </figure>
+
+  <div class="pit" style="border-left-color: var(--green);"><span class="l" style="color: var(--green);">確認クイズ</span>「備品を予約できる」と「予約が重複したらエラーになる」、ストーリーはどちら? — <b>前者</b>です。後者はそのストーリーの合格チェック(シナリオ)になります。</div>
+</section>
+
+<section>
+  <div class="sec-head"><span class="sec-no">1-4</span><h2>ゴールの旗: E2Eテストを最初に立てる</h2></div>
   <p class="body">機能(ストーリー)に着手したら、3拍子を回し始める前に<b>E2Eテスト(画面から操作する総合テスト)を1本書いて「旗」を立てます</b>。この旗は最初は当然Redで、<b>すぐ通そうとはしません</b>。単体テストの3拍子を何周も回し、実装が積み上がると、最後に旗がひとりでにGreenになります。それが「この機能は完成した」の合図です。</p>
 
   <div class="pit" style="border-left-color: var(--green);"><span class="l" style="color: var(--green);">用語 ─ GIVEN / WHEN / THEN</span>旗の中身は、要件定義で決めた「受け入れ条件」です。受け入れ条件は3行で書きます: <b>Given = 前提(〜の状態で) / When = 操作(〜したら) / Then = 結果(〜になるはず)</b>。例:「Given 在庫0の備品がある / When 借りるボタンを押す / Then エラーが表示され、貸出は登録されない」。この3行がそのままE2Eテストの設計図になります。</div>
@@ -164,12 +202,12 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
       <text x="762" y="272" text-anchor="middle" class="sub">緑になった日が完成日</text>
     </g>
   </svg>
-  <figcaption><span class="fno">図 1</span>内側の3拍子と、ゴールの旗(E2E)。旗は立てたら触らず、実装の積み上げで緑にします。</figcaption>
+  <figcaption><span class="fno">図 2</span>内側の3拍子と、ゴールの旗(E2E)。旗は立てたら触らず、実装の積み上げで緑にします。</figcaption>
   </figure>
 </section>
 
 <section>
-  <div class="sec-head"><span class="sec-no">1-4</span><h2>つまずきポイント3つ</h2></div>
+  <div class="sec-head"><span class="sec-no">1-5</span><h2>つまずきポイント3つ</h2></div>
   <div class="pit"><span class="l">PITFALL 1</span><b>テストを後から書く。</b>それはTDDではなく「追認」です。実装の癖ごと正解扱いしてしまうため、間違いを見つけられません。</div>
   <div class="pit"><span class="l">PITFALL 2</span><b>Redの確認を飛ばす。</b>書いたテストがいきなり通ったら喜ぶところではなく、疑うところです。テスト自体が壊れているか、何も検証していない可能性があります。</div>
   <div class="pit"><span class="l">PITFALL 3</span><b>テストを一度にたくさん書く。</b>1本書いて1本通す、が基本のリズムです。まとめて書くと、どの失敗がどの原因か分からなくなります。例外はゴールの旗(E2E)の1本だけで、あれは意図して赤のまま置きます。赤を待たせてよい本数はレベルで違います(<a href="tdd-levels.html">③レベル編</a>で説明します)。</div>
