@@ -58,12 +58,6 @@ figure.fig figcaption .fno { font-family: var(--mono); color: var(--red); margin
 .dgm .sub { font-size: 9.5px; fill: var(--muted); }
 .dgm .you { font-size: 11px; font-weight: 700; fill: var(--red); }
 
-pre.cmd { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--green); padding: 12px 16px; margin: 12px 0; overflow-x: auto; font-family: var(--mono); font-size: 12px; line-height: 1.9; white-space: pre-wrap; }
-ul.prep { list-style: none; margin: 10px 0; }
-ul.prep li { padding: 8px 0 8px 20px; border-bottom: 1px dashed var(--line); position: relative; font-size: 13px; }
-ul.prep li::before { content: "▪"; position: absolute; left: 2px; color: var(--green); font-size: 11px; }
-ul.prep li b { font-weight: 700; }
-
 .station { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--green); padding: 14px 20px 10px; margin: 12px 0; }
 .station.human { border-left-color: var(--red); }
 .station .no { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .12em; color: var(--green); }
@@ -78,7 +72,6 @@ ul.prep li b { font-weight: 700; }
 .pn { display: flex; justify-content: space-between; gap: 12px; margin-top: 56px; flex-wrap: wrap; }
 .pn a { font-size: 13px; font-weight: 600; padding: 10px 18px; border: 1px solid var(--line); background: var(--card); }
 .pn a:hover { text-decoration: none; border-color: var(--red); }
-.pn .ph { visibility: hidden; }
 
 footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line-strong); font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .06em; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
 </style>
@@ -88,32 +81,20 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
 
 <nav class="crumb"><a href="index.html">← ポータル</a><span>問い合わせ: 情報システム(m_nakagawa@smilior.com)</span></nav>
 <nav class="series">
+  <a href="practice-setup.html">⓪ 立ち上げ編</a>
   <a class="cur" href="practice-flow.html">① 流れ編</a>
   <a href="practice-steps.html">② 手順編</a>
 </nav>
 
 <header>
-  <div class="eyebrow">DRIVER'S GUIDE 1/2 ・ STD-AIDEV-008</div>
+  <div class="eyebrow">DRIVER'S GUIDE ① ・ STD-AIDEV-008</div>
   <h1>実践ガイド ① 流れ編<br>─ 1ストーリーの旅</h1>
   <p class="doc-lead">「備品を返却する」という1つの機能が、指示からマージまでどう旅するか。あなたが降りる駅は2つだけです。</p>
 </header>
 
 <section>
-  <div class="sec-head"><span class="sec-no">1-0</span><h2>開発を始める前に: 案件リポジトリを作る</h2></div>
-  <p class="body">開発を始める前に、テンプレートから案件用のリポジトリを複製します。1コマンドで、履歴のないまっさらな状態から始まります(エージェント10体・雛形・規約はすべて複製されます)。</p>
-  <pre class="cmd">gh repo create smilior/&lt;案件名&gt; --template smilior/ai-dev-template --private --clone
-cd &lt;案件名&gt; && claude   # →「◯◯を作りたい。企画書から始めて」</pre>
-  <p class="body">複製した先での調整は3つだけです:</p>
-  <ul class="prep">
-    <li><b>docs/standards/ は削除してよい。</b>正本はテンプレート側にあり、閲覧はこの文書サイトでできます。残すと改訂が追いかけてこない古いコピーになります</li>
-    <li><b>.github/workflows/pages.yml を削除する。</b>案件リポジトリは private のため Pages は動きません</li>
-    <li><b>CLAUDE.md の「案件確定時に記入」欄</b>は、スタック決定後に tech-lead に任せます</li>
-  </ul>
-</section>
-
-<section>
   <div class="sec-head"><span class="sec-no">1-1</span><h2>路線図: 7つの駅</h2></div>
-  <p class="body">開発は7駅の路線を進みます。緑の駅はAIが自走し、<b>赤い駅だけあなたが降りて判断します</b>。設計(要件定義・基本設計・規約)が済んでいることが乗車の条件です。</p>
+  <p class="body">開発は7駅の路線を進みます。緑の駅はAIが自走し、<b>赤い駅だけあなたが降りて判断します</b>。乗車券(企画〜規約の5つの承認)は<a href="practice-setup.html">⓪ 立ち上げ編</a>で手に入れてください。</p>
 
   <figure class="fig">
   <svg class="dgm" viewBox="0 0 960 235" role="img" aria-label="7駅の路線図。検収とマージの2駅だけが人間の駅">
@@ -225,13 +206,13 @@ cd &lt;案件名&gt; && claude   # →「◯◯を作りたい。企画書から
 </section>
 
 <div class="pn">
-  <span class="ph"></span>
+  <a href="practice-setup.html">← 前へ: ⓪ 立ち上げ編</a>
   <a href="practice-steps.html">次へ: ② 手順編 ─ コピペ運転マニュアル →</a>
 </div>
 
 <footer>
   <span>考え方の背景: <a href="tdd-basics.html">はじめてのTDD(全5回)</a></span>
-  <span>STD-AIDEV-008 (1/2) ・ REV 1.0 ・ 2026-07-04</span>
+  <span>STD-AIDEV-008 (①) ・ REV 1.1 ・ 2026-07-04</span>
 </footer>
 
 </div>
