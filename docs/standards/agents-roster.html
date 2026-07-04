@@ -317,7 +317,7 @@ footer { margin-top: 64px; padding-top: 18px; border-top: 1.5px solid var(--line
       <span class="tag">tdd-developer</span><h3>実装担当</h3>
       <p class="mission">Red→Green→Refactor の順で実装する。</p>
       <div class="docs"><span class="chip">テストコード</span><span class="chip">実装</span><span class="chip">PR</span></div>
-      <p class="guard">Red の確認を省略しない。テストを書き換えて通すのは禁止、必要なら報告して停止する。</p>
+      <p class="guard">実装前に Red を確認する。テストはそのままに実装側を直して通し、テスト側を疑うときは報告して停止する。</p>
       <p class="call"><span class="k">起動例:</span>「US-01 を実装して」</p>
     </div>
     <div class="agent">
@@ -337,8 +337,8 @@ footer { margin-top: 64px; padding-top: 18px; border-top: 1.5px solid var(--line
     <div class="agent">
       <span class="tag">governance</span><h3>統制担当</h3>
       <p class="mission">監査に答えられる状態を最小コストで保つ。</p>
-      <div class="docs"><span class="chip">文書管理ルール</span><span class="chip">AI利用ルール</span><span class="chip">記録保管</span></div>
-      <p class="guard">重い仕組みを提案しない。トレーサビリティは監査で求められてから後付けする。</p>
+      <div class="docs"><span class="chip">文書管理ルール</span><span class="chip">AI利用ルール</span><span class="chip">記録保管</span><span class="chip">フォーマット規則</span></div>
+      <p class="guard">統制は既存の Git 運用に相乗りさせる。トレーサビリティは監査で求められてから後付けする。</p>
       <p class="call"><span class="k">起動例:</span>「AI利用ルールを起案して」</p>
     </div>
   </div>
@@ -355,7 +355,7 @@ footer { margin-top: 64px; padding-top: 18px; border-top: 1.5px solid var(--line
         <li><b>着手前に3行以内の計画</b>を書く(何を・どのファイルに・どの順で)</li>
         <li><b>終える前に自己検証</b>する。定義のチェック項目に照らし、不合格なら直してから返す</li>
         <li><b>ルールは対象すべてに適用</b>する。最初の1件で終えない</li>
-        <li><b>頼まれた書類だけ</b>を作る。ついでに他のファイルを直さない</li>
+        <li><b>頼まれた書類だけ</b>を作る。範囲外で直したい点は、変更せず最終報告に1行で書く</li>
       </ul>
     </div>
     <div class="rulebox">
