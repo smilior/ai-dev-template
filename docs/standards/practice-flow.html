@@ -58,6 +58,12 @@ figure.fig figcaption .fno { font-family: var(--mono); color: var(--red); margin
 .dgm .sub { font-size: 9.5px; fill: var(--muted); }
 .dgm .you { font-size: 11px; font-weight: 700; fill: var(--red); }
 
+pre.cmd { background: var(--card); border: 1px solid var(--line); border-left: 3px solid var(--green); padding: 12px 16px; margin: 12px 0; overflow-x: auto; font-family: var(--mono); font-size: 12px; line-height: 1.9; white-space: pre-wrap; }
+ul.prep { list-style: none; margin: 10px 0; }
+ul.prep li { padding: 8px 0 8px 20px; border-bottom: 1px dashed var(--line); position: relative; font-size: 13px; }
+ul.prep li::before { content: "▪"; position: absolute; left: 2px; color: var(--green); font-size: 11px; }
+ul.prep li b { font-weight: 700; }
+
 .station { background: var(--card); border: 1px solid var(--line); border-left: 4px solid var(--green); padding: 14px 20px 10px; margin: 12px 0; }
 .station.human { border-left-color: var(--red); }
 .station .no { font-family: var(--mono); font-size: 10.5px; font-weight: 700; letter-spacing: .12em; color: var(--green); }
@@ -91,6 +97,19 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
   <h1>実践ガイド ① 流れ編<br>─ 1ストーリーの旅</h1>
   <p class="doc-lead">「備品を返却する」という1つの機能が、指示からマージまでどう旅するか。あなたが降りる駅は2つだけです。</p>
 </header>
+
+<section>
+  <div class="sec-head"><span class="sec-no">1-0</span><h2>乗車前の準備: 案件リポジトリを作る</h2></div>
+  <p class="body">この路線に乗る前に、テンプレートから案件用のリポジトリを複製します。1コマンドで、履歴のないまっさらな状態から始まります(エージェント10体・雛形・規約はすべて複製されます)。</p>
+  <pre class="cmd">gh repo create smilior/&lt;案件名&gt; --template smilior/ai-dev-template --private --clone
+cd &lt;案件名&gt; && claude   # →「◯◯を作りたい。企画書から始めて」</pre>
+  <p class="body">複製した先での調整は3つだけです:</p>
+  <ul class="prep">
+    <li><b>docs/standards/ は削除してよい。</b>正本はテンプレート側にあり、閲覧はこの文書サイトでできます。残すと改訂が追いかけてこない古いコピーになります</li>
+    <li><b>.github/workflows/pages.yml を削除する。</b>案件リポジトリは private のため Pages は動きません</li>
+    <li><b>CLAUDE.md の「案件確定時に記入」欄</b>は、スタック決定後に tech-lead に任せます</li>
+  </ul>
+</section>
 
 <section>
   <div class="sec-head"><span class="sec-no">1-1</span><h2>路線図: 7つの駅</h2></div>
@@ -178,7 +197,7 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
 
 <section>
   <div class="sec-head"><span class="sec-no">1-4</span><h2>Issueが旅程表になる</h2></div>
-  <p class="body">1ストーリー = 1 Issue で進めます。旅の記録はすべてIssueのコメント欄に残るので、<b>Issue一覧を開けばどの列車がどの駅にいるか一目で分かります</b>(未着手/表待ち/実装中/完了の進捗ボード)。雛形は <a href="https://github.com/smilior/python-template/blob/main/.github/ISSUE_TEMPLATE/story.md">.github/ISSUE_TEMPLATE/story.md</a> にあり、Issue作成時に自動で選べます。</p>
+  <p class="body">1ストーリー = 1 Issue で進めます。旅の記録はすべてIssueのコメント欄に残るので、<b>Issue一覧を開けばどの列車がどの駅にいるか一目で分かります</b>(未着手/表待ち/実装中/完了の進捗ボード)。雛形は <a href="https://github.com/smilior/ai-dev-template/blob/main/.github/ISSUE_TEMPLATE/story.md">.github/ISSUE_TEMPLATE/story.md</a> にあり、Issue作成時に自動で選べます。</p>
 
   <figure class="fig">
   <svg class="dgm" viewBox="0 0 960 330" role="img" aria-label="Issue1枚の解剖図。本文と4つのコメントで1ストーリーが完結し、あなたの記録は検収の確定コメントとマージの2つ">
