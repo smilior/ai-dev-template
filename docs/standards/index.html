@@ -43,6 +43,9 @@ a:hover { text-decoration: underline; }
 a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 .page { max-width: 1020px; margin: 0 auto; padding: 48px 28px 72px; }
 
+.crumb { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted); margin-bottom: 34px; }
+.crumb a { color: var(--muted); }
+.crumb a:hover { color: var(--blue); }
 .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; color: var(--muted); margin-bottom: 14px; }
 h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 4.2vw, 38px); letter-spacing: .05em; line-height: 1.4; }
 .doc-lead { margin-top: 10px; color: var(--muted); font-size: 15px; }
@@ -107,6 +110,8 @@ footer { margin-top: 64px; padding-top: 18px; border-top: 1.5px solid var(--line
 <body>
 <div class="page">
 
+<nav class="crumb"><span>SMILIOR ・ INTERNAL SYSTEMS</span><span>問い合わせ: 情報システム(m_nakagawa@smilior.com)</span></nav>
+
 <header>
   <div class="eyebrow">INTERNAL IT STANDARD ・ PORTAL</div>
   <h1>AI駆動開発ポータル</h1>
@@ -136,6 +141,16 @@ footer { margin-top: 64px; padding-top: 18px; border-top: 1.5px solid var(--line
         <span class="t">チーム名鑑 <span class="arrow">→</span></span>
         <span class="d">指示者と10体の専門エージェント。誰に何を頼めるか、起動フレーズ付き。</span>
         <span class="loc">STD-AIDEV-002 ・ agents-roster.html</span>
+      </a></li>
+      <li><a class="doc" href="cooperation-guide.html">
+        <span class="t">利用部門向け 協力ガイド <span class="arrow">→</span></span>
+        <span class="d">質問への答え方・画面案の見方・動作確認のやり方。出番は3回だけ。</span>
+        <span class="loc">STD-AIDEV-005 ・ cooperation-guide.html</span>
+      </a></li>
+      <li><a class="doc" href="approval-guide.html">
+        <span class="t">上長向け 承認ガイド <span class="arrow">→</span></span>
+        <span class="d">承認は4種類・1件5〜10分。種類ごとの見るポイントつき。</span>
+        <span class="loc">STD-AIDEV-006 ・ approval-guide.html</span>
       </a></li>
       <li><a class="doc" href="https://github.com/smilior/python-template/tree/main/docs/project">
         <span class="t">案件書類フォルダ <span class="arrow">→</span></span>

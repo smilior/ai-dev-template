@@ -35,7 +35,10 @@ CSS = """
 body { font-family: var(--sans); font-size: 14.5px; line-height: 2.0; color: var(--ink); background: var(--paper); }
 a { color: var(--blue); text-decoration: none; }
 a:hover { text-decoration: underline; }
-.page { max-width: 860px; margin: 0 auto; padding: 48px 28px 72px; }
+.page { max-width: 860px; margin: 0 auto; padding: 36px 28px 72px; }
+.crumb { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted); margin-bottom: 34px; }
+.crumb a { color: var(--muted); }
+.crumb a:hover { color: var(--blue); }
 .eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; color: var(--muted); margin-bottom: 14px; }
 h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(24px, 4vw, 34px); letter-spacing: .05em; line-height: 1.4; }
 .doc-lead { margin-top: 10px; color: var(--muted); font-size: 14.5px; }
@@ -192,6 +195,7 @@ PAGE = """<!DOCTYPE html>
 </head>
 <body>
 <div class="page">
+<nav class="crumb"><a href="{back}">← ポータル</a><span>{contact}</span></nav>
 <header>
   <div class="eyebrow">{eyebrow}</div>
   <h1>{title}</h1>
@@ -227,6 +231,8 @@ def main() -> None:
     ap.add_argument("--approval", default="main へのマージ", help="承認方法")
     ap.add_argument("--lead", default="", help="タイトル下の1行説明")
     ap.add_argument("--eyebrow", default="INTERNAL IT STANDARD ・ GENERATED DOCUMENT", help="最上部のラベル")
+    ap.add_argument("--back", default="index.html", help="ポータルへ戻るリンク先")
+    ap.add_argument("--contact", default="問い合わせ: 情報システム(m_nakagawa@smilior.com)", help="問い合わせ先の表示")
     args = ap.parse_args()
 
     src = Path(args.input)
@@ -241,6 +247,8 @@ def main() -> None:
         date=html.escape(args.date),
         approval=html.escape(args.approval),
         source=html.escape(src.name),
+        back=html.escape(args.back),
+        contact=html.escape(args.contact),
         body=body,
     )
     Path(args.output).write_text(page, encoding="utf-8")

@@ -56,6 +56,9 @@ a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
 
 /* ---- document header ---- */
 .doc-head { margin-bottom: 20px; }
+.crumb { display: flex; justify-content: space-between; gap: 12px; flex-wrap: wrap; font-family: var(--mono); font-size: 11px; letter-spacing: .06em; color: var(--muted); margin-bottom: 34px; }
+.crumb a { color: var(--muted); }
+.crumb a:hover { color: var(--blue); }
 .eyebrow {
   font-family: var(--mono); font-size: 11px; letter-spacing: .22em;
   color: var(--muted); margin-bottom: 14px;
@@ -237,6 +240,8 @@ footer {
 </head>
 <body>
 <div class="page">
+
+<nav class="crumb"><a href="index.html">← ポータル</a><span>問い合わせ: 情報システム(m_nakagawa@smilior.com)</span></nav>
 
 <header class="doc-head">
   <div class="eyebrow">INTERNAL IT STANDARD ・ AI-DRIVEN DEVELOPMENT</div>
