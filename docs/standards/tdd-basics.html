@@ -121,6 +121,8 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
   <div class="sec-head"><span class="sec-no">1-3</span><h2>ゴールの旗: E2Eテストを最初に立てる</h2></div>
   <p class="body">機能(ストーリー)に着手したら、3拍子を回し始める前に<b>E2Eテスト(画面から操作する総合テスト)を1本書いて「旗」を立てます</b>。この旗は最初は当然Redで、<b>すぐ通そうとはしません</b>。単体テストの3拍子を何周も回し、実装が積み上がると、最後に旗がひとりでにGreenになります。それが「この機能は完成した」の合図です。</p>
 
+  <div class="pit" style="border-left-color: var(--green);"><span class="l" style="color: var(--green);">用語 ─ GIVEN / WHEN / THEN</span>旗の中身は、要件定義で決めた「受け入れ条件」です。受け入れ条件は3行で書きます: <b>Given = 前提(〜の状態で) / When = 操作(〜したら) / Then = 結果(〜になるはず)</b>。例:「Given 在庫0の備品がある / When 借りるボタンを押す / Then エラーが表示され、貸出は登録されない」。この3行がそのままE2Eテストの設計図になります。</div>
+
   <figure class="fig">
   <svg class="dgm" viewBox="0 0 960 340" role="img" aria-label="内側の3拍子サイクルを回すと、右に立てたE2Eの旗がGreenになる">
     <defs>

@@ -122,7 +122,7 @@ footer { margin-top: 48px; padding-top: 18px; border-top: 1.5px solid var(--line
   <div class="sec-head"><span class="sec-no">4-1</span><h2>最低限の6観点</h2></div>
   <p class="body">テスト観点とは「どの角度から壊しに行くか」の一覧です。この6つを機能ごとに確認すれば、社内システムの事故の大半を先回りできます。網羅チェックはAIに「この6観点で抜けているケースを挙げて」と聞くのが速く、人間は取捨選択だけやります。</p>
   <div class="vps">
-    <div class="vp"><span class="no">1 ─ 正常系</span><h3>仕様どおりに動く</h3><p>受け入れ条件(Given/When/Then)をそのまま写せばテストになります。土台ですが、<b>ここだけで満足しない</b>こと。</p><span class="ex">備品を検索して借りられる</span></div>
+    <div class="vp"><span class="no">1 ─ 正常系</span><h3>仕様どおりに動く</h3><p>受け入れ条件(Given=前提 / When=操作 / Then=期待する結果)をそのまま写せばテストになります。土台ですが、<b>ここだけで満足しない</b>こと。</p><span class="ex">備品を検索して借りられる</span></div>
     <div class="vp"><span class="no">2 ─ 境界値</span><h3>端を狙う</h3><p>0・1・上限・上限+1、月末・年度末・0時前後。<b>バグは範囲の真ん中ではなく端に住んでいます。</b>数直線を書いて境目に丸を付けるのが作り方です。</p><span class="ex">在庫0で借りる / 貸出上限ちょうど / 締め日の23:59</span></div>
     <div class="vp"><span class="no">3 ─ 異常系</span><h3>わざと壊しに行く</h3><p>入力の不正(未入力・型違い)、状態の不正(削除済みIDへの操作)、環境の故障(DB断)。確認するのは<b>「安全に止まり、分かるメッセージが出ること」</b>です。</p><span class="ex">必須未入力 / 存在しないID / DB接続断のときの表示</span></div>
     <div class="vp"><span class="no">4 ─ 権限</span><h3>「できない」が本当にできない</h3><p>ボタンが見えないだけでは不十分。<b>URLを直接叩いても、APIを直接呼んでも拒否されるか</b>まで見ます。権限マトリクスの×印を1個ずつテストに変えます。</p><span class="ex">一般社員が承認画面のURLを直接開いたら拒否される</span></div>
