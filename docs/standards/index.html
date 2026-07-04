@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AI駆動開発ポータル</title>
+<style>
+:root {
+  --paper: #F4F5F1;
+  --card: #FFFFFF;
+  --ink: #1C2622;
+  --muted: #5D6B63;
+  --line: #D9DED6;
+  --line-strong: #2A3630;
+  --red: #C43A2E;
+  --green: #1E7A46;
+  --blue: #2B5FAB;
+  --tint-green: #E1EFE6;
+  --tint-blue: #E3EAF5;
+  --serif: "Hiragino Mincho ProN", "Yu Mincho", "YuMincho", "Noto Serif JP", serif;
+  --sans: "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic", "YuGothic", "Noto Sans JP", sans-serif;
+  --mono: "SF Mono", "SFMono-Regular", Menlo, Consolas, monospace;
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --paper: #141917;
+    --card: #1D2421;
+    --ink: #E8ECE7;
+    --muted: #96A49B;
+    --line: #303B35;
+    --line-strong: #C6D0C9;
+    --red: #E06A5C;
+    --green: #4DAE7C;
+    --blue: #6E9BD8;
+    --tint-green: #1F332A;
+    --tint-blue: #212B3B;
+  }
+}
+* { margin: 0; padding: 0; box-sizing: border-box; }
+body { font-family: var(--sans); font-size: 14.5px; line-height: 1.95; color: var(--ink); background: var(--paper); }
+a { color: var(--blue); text-decoration: none; }
+a:hover { text-decoration: underline; }
+a:focus-visible { outline: 2px solid var(--blue); outline-offset: 2px; }
+.page { max-width: 1020px; margin: 0 auto; padding: 48px 28px 72px; }
+
+.eyebrow { font-family: var(--mono); font-size: 11px; letter-spacing: .22em; color: var(--muted); margin-bottom: 14px; }
+h1 { font-family: var(--serif); font-weight: 600; font-size: clamp(26px, 4.2vw, 38px); letter-spacing: .05em; line-height: 1.4; }
+.doc-lead { margin-top: 10px; color: var(--muted); font-size: 15px; }
+
+.titleblock { margin-top: 26px; display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); border: 1.5px solid var(--line-strong); background: var(--card); }
+.titleblock .cell { padding: 9px 14px 7px; border-left: 1px solid var(--line); min-width: 0; }
+.titleblock .cell:first-child { border-left: none; }
+.titleblock .k { display: block; font-family: var(--mono); font-size: 9.5px; letter-spacing: .16em; color: var(--muted); margin-bottom: 2px; }
+.titleblock .v { font-size: 12.5px; font-weight: 600; overflow-wrap: anywhere; }
+.titleblock .v.mono { font-family: var(--mono); font-weight: 500; }
+@media (max-width: 820px) {
+  .titleblock { grid-template-columns: 1fr 1fr; }
+  .titleblock .cell { border-top: 1px solid var(--line); }
+  .titleblock .cell:nth-child(-n+2) { border-top: none; }
+  .titleblock .cell:nth-child(odd) { border-left: none; }
+  .titleblock .cell:nth-child(even) { border-left: 1px solid var(--line); }
+}
+
+.halves { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; margin-top: 44px; }
+.half { background: var(--card); border: 1px solid var(--line); padding: 26px 28px 20px; }
+.half.use { border-top: 4px solid var(--green); }
+.half.spec { border-top: 4px solid var(--blue); }
+.half .tag { font-family: var(--mono); font-size: 11px; letter-spacing: .18em; color: var(--muted); }
+.half h2 { font-family: var(--serif); font-size: 24px; font-weight: 600; letter-spacing: .06em; margin: 4px 0 14px; }
+.half p.desc { font-size: 13px; color: var(--muted); margin-bottom: 16px; }
+@media (max-width: 760px) { .halves { grid-template-columns: 1fr; } }
+
+ol.steps { list-style: none; counter-reset: st; margin-bottom: 18px; }
+ol.steps li { counter-increment: st; display: flex; gap: 12px; align-items: baseline; padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 13.5px; }
+ol.steps li::before { content: counter(st); font-family: var(--mono); font-size: 12px; font-weight: 700; color: var(--green); border: 1.5px solid var(--green); border-radius: 50%; width: 22px; height: 22px; display: inline-flex; align-items: center; justify-content: center; flex: none; transform: translateY(3px); }
+ol.steps li b { font-weight: 700; }
+
+.links { list-style: none; }
+.links li { border-bottom: 1px solid var(--line); }
+.links li:last-child { border-bottom: none; }
+.links a.doc { display: block; padding: 12px 6px; }
+.links a.doc:hover { background: var(--paper); text-decoration: none; }
+.links .t { font-size: 14px; font-weight: 700; color: var(--ink); }
+.links .t .arrow { color: var(--blue); font-family: var(--mono); margin-left: 6px; }
+.links .d { display: block; font-size: 12px; color: var(--muted); line-height: 1.7; }
+.links .loc { font-family: var(--mono); font-size: 10px; color: var(--muted); letter-spacing: .04em; }
+
+section.table-sec { margin-top: 56px; }
+.sec-head { display: flex; align-items: baseline; gap: 14px; margin-bottom: 8px; }
+.sec-no { font-family: var(--mono); font-size: 13px; font-weight: 700; color: var(--red); letter-spacing: .06em; white-space: nowrap; }
+h2.sec-title { font-family: var(--serif); font-weight: 600; font-size: clamp(20px, 3vw, 26px); letter-spacing: .06em; }
+.sec-head::after { content: ""; flex: 1; border-top: 1px solid var(--line); transform: translateY(-4px); }
+.sec-intro { margin-bottom: 20px; max-width: 46em; }
+
+.tblwrap { overflow-x: auto; border: 1px solid var(--line); background: var(--card); }
+table { border-collapse: collapse; width: 100%; min-width: 640px; }
+th { text-align: left; font-family: var(--mono); font-weight: 500; font-size: 10.5px; letter-spacing: .14em; color: var(--muted); padding: 10px 16px 8px; border-bottom: 1.5px solid var(--line-strong); white-space: nowrap; }
+td { padding: 9px 16px; border-bottom: 1px solid var(--line); font-size: 13px; line-height: 1.8; vertical-align: top; }
+tr:last-child td { border-bottom: none; }
+td.ph { font-weight: 700; white-space: nowrap; }
+td.ph .no { font-family: var(--mono); font-size: 11px; color: var(--muted); margin-right: 8px; }
+td .agent { font-family: var(--mono); font-size: 11.5px; color: var(--green); white-space: nowrap; }
+
+footer { margin-top: 64px; padding-top: 18px; border-top: 1.5px solid var(--line-strong); font-family: var(--mono); font-size: 11px; color: var(--muted); letter-spacing: .06em; display: flex; justify-content: space-between; flex-wrap: wrap; gap: 8px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+<header>
+  <div class="eyebrow">INTERNAL IT STANDARD ・ PORTAL</div>
+  <h1>AI駆動開発ポータル</h1>
+  <p class="doc-lead">左から使い、右で確かめる。全文書への入口。</p>
+  <div class="titleblock" role="table" aria-label="文書管理情報">
+    <div class="cell"><span class="k">文書番号</span><span class="v mono">STD-AIDEV-000</span></div>
+    <div class="cell"><span class="k">版</span><span class="v mono">1.0</span></div>
+    <div class="cell"><span class="k">発行日</span><span class="v mono">2026-07-04</span></div>
+    <div class="cell"><span class="k">承認</span><span class="v">main へのマージ</span></div>
+    <div class="cell"><span class="k">リポジトリ</span><span class="v mono">smilior/python-template</span></div>
+  </div>
+</header>
+
+<div class="halves">
+
+  <div class="half use">
+    <span class="tag">HOW TO USE</span>
+    <h2>使い方</h2>
+    <p class="desc">開発はこの3手で回る。あなたが書くのはチャットの指示だけ。</p>
+    <ol class="steps">
+      <li><span><b>題材を伝える。</b>「◯◯を管理するシステムを作りたい」で企画が動き出す</span></li>
+      <li><span><b>確認事項に答える。</b>エージェントが業務ルールを勝手に決めず、質問リストにして返してくる</span></li>
+      <li><span><b>PR をマージする。</b>マージ = 承認記録。docs/ とコードが1段ずつ育つ</span></li>
+    </ol>
+    <ul class="links">
+      <li><a class="doc" href="agents-roster.html">
+        <span class="t">チーム名鑑 <span class="arrow">→</span></span>
+        <span class="d">指示者と10体の専門エージェント。誰に何を頼めるか、起動フレーズ付き。</span>
+        <span class="loc">STD-AIDEV-002 ・ agents-roster.html</span>
+      </a></li>
+      <li><a class="doc" href="https://github.com/smilior/python-template/tree/main/docs/project">
+        <span class="t">案件書類フォルダ <span class="arrow">→</span></span>
+        <span class="d">雛形を埋めながら進める作業場。全書類に記入ガイドと記入例入り。</span>
+        <span class="loc">docs/project/</span>
+      </a></li>
+    </ul>
+  </div>
+
+  <div class="half spec">
+    <span class="tag">SPECIFICATIONS</span>
+    <h2>仕様</h2>
+    <p class="desc">どう作るかの決めごと。迷ったらここに戻る。</p>
+    <ul class="links">
+      <li><a class="doc" href="ai-driven-dev-lifecycle.html">
+        <span class="t">ライフサイクル標準 <span class="arrow">→</span></span>
+        <span class="d">企画から保守までの成果物・TDDの回し方・テストレベル・DB方針。</span>
+        <span class="loc">STD-AIDEV-001 ・ ai-driven-dev-lifecycle.html</span>
+      </a></li>
+      <li><a class="doc" href="https://github.com/smilior/python-template/blob/main/docs/standards/governance.md">
+        <span class="t">統制規程 <span class="arrow">→</span></span>
+        <span class="d">文書管理・記録保管・AI利用・フォーマットの4規程。承認欄付き起案書。</span>
+        <span class="loc">governance.md(正本・GitHubで開く)</span>
+      </a></li>
+      <li><a class="doc" href="https://github.com/smilior/python-template/blob/main/CLAUDE.md">
+        <span class="t">開発規約 <span class="arrow">→</span></span>
+        <span class="d">テスト方針とTDDガードレール。AIが毎セッション読む実質の詳細設計。</span>
+        <span class="loc">CLAUDE.md(正本・GitHubで開く)</span>
+      </a></li>
+    </ul>
+  </div>
+
+</div>
+
+<section class="table-sec">
+  <div class="sec-head"><span class="sec-no">§</span><h2 class="sec-title">フェーズ早見表</h2></div>
+  <p class="sec-intro">どのフェーズで・何を作り・誰が書くか。詳細はライフサイクル標準へ。</p>
+  <div class="tblwrap">
+  <table>
+    <thead><tr><th>フェーズ</th><th>作る書類</th><th>担当</th><th>雛形</th></tr></thead>
+    <tbody>
+      <tr><td class="ph"><span class="no">01</span>企画</td><td>企画書・費用対効果メモ</td><td><span class="agent">planner</span></td><td><a href="https://github.com/smilior/python-template/blob/main/docs/project/01_prd.md">01_prd.md</a></td></tr>
+      <tr><td class="ph"><span class="no">02</span>要件定義</td><td>要件定義書(受け入れ条件)・用語集</td><td><span class="agent">business-analyst</span></td><td><a href="https://github.com/smilior/python-template/blob/main/docs/project/02_requirements.md">02_requirements.md</a> / <a href="https://github.com/smilior/python-template/blob/main/docs/project/03_glossary.md">03_glossary.md</a></td></tr>
+      <tr><td class="ph"><span class="no">03</span>モックアップ</td><td>画面一覧・遷移図・決定メモ</td><td><span class="agent">ui-designer</span></td><td><a href="https://github.com/smilior/python-template/blob/main/docs/project/05_screens.md">05_screens.md</a></td></tr>
+      <tr><td class="ph"><span class="no">04</span>基本設計</td><td>ADR・構成図・ER図・API仕様</td><td><span class="agent">architect</span></td><td><a href="https://github.com/smilior/python-template/blob/main/docs/project/04_architecture.md">04_architecture.md</a> / <a href="https://github.com/smilior/python-template/tree/main/docs/project/adr">adr/</a></td></tr>
+      <tr><td class="ph"><span class="no">05</span>詳細設計</td><td>開発規約(クラス図は書かない)</td><td><span class="agent">tech-lead</span></td><td><a href="https://github.com/smilior/python-template/blob/main/CLAUDE.md">CLAUDE.md</a></td></tr>
+      <tr><td class="ph"><span class="no">06</span>開発・テスト</td><td>テスト計画・テストコード・PR</td><td><span class="agent">qa-engineer / tdd-developer</span></td><td><a href="https://github.com/smilior/python-template/blob/main/docs/project/06_test-plan.md">06_test-plan.md</a></td></tr>
+      <tr><td class="ph"><span class="no">07</span>PoC・トライアル</td><td>検証計画と結果(採否の理由)</td><td>指示者</td><td><a href="https://github.com/smilior/python-template/tree/main/docs/project/poc">poc/</a></td></tr>
+      <tr><td class="ph"><span class="no">08</span>社内リリース</td><td>Runbook・操作マニュアル・案内</td><td><span class="agent">sre-ops / tech-writer</span></td><td><a href="https://github.com/smilior/python-template/tree/main/docs/project/runbook">runbook/</a> / <a href="https://github.com/smilior/python-template/blob/main/docs/project/07_manual.md">07_manual.md</a></td></tr>
+      <tr><td class="ph"><span class="no">09</span>保守</td><td>障害記録・ADR継続・引き継ぎ=docs/一式</td><td><span class="agent">sre-ops / architect</span></td><td><a href="https://github.com/smilior/python-template/blob/main/docs/project/runbook/incident-template.md">incident-template.md</a></td></tr>
+    </tbody>
+  </table>
+  </div>
+</section>
+
+<footer>
+  <span>ENTRY POINT: docs/standards/index.html</span>
+  <span>STD-AIDEV-000 ・ REV 1.0 ・ 2026-07-04</span>
+</footer>
+
+</div>
+</body>
+</html>
